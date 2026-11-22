@@ -46,6 +46,21 @@ class SanskritReader(HTMLParser):
 
 
 class ReleaseTests(unittest.TestCase):
+    def test_opening_study_and_navigation(self):
+        from study import NOTES
+        home = Path('dist/index.html').read_text()
+        start = re.search(r'class="primary" href="([^"]+)"', home).group(1)
+        route, anchor = start.split('#')
+        chapter = (Path('dist') / route.strip('/') / 'index.html').read_text()
+        self.assertIn(f'id="{anchor}"', chapter)
+        self.assertEqual(chapter.count('<h3>Translation</h3>'), len(NOTES))
+        self.assertEqual(chapter.count('<h3>Synonyms</h3>'), len(NOTES))
+        following = re.search(r'rel="next" href="([^"]+)"', chapter).group(1)
+        next_path = urljoin(route, following)
+        next_chapter = (Path('dist') / next_path.strip('/') / 'index.html').read_text()
+        previous = re.search(r'rel="prev" href="([^"]+)"', next_chapter).group(1)
+        self.assertEqual(urljoin(next_path, previous), route)
+
     def test_transliteration(self):
         for source, expected in [('धर्मक्षेत्रे', 'dharmakṣetre'), ('अध्यायः', 'adhyāyaḥ'), ('जयम्', 'jayam')]:
             self.assertEqual(transliterate(source), expected)
