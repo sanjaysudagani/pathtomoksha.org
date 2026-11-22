@@ -1,0 +1,146 @@
+{
+  "edition": "Kumbhakonam SARIT",
+  "sha256": "35f6808ac45c6ee7386db70afea1f79f4b83a60760904c308fcea0bff2272100",
+  "raw_bytes": 38593329,
+  "parvas": [
+    {
+      "parva": 1,
+      "source_id": "ādiparva",
+      "chapter_divisions": 260,
+      "separate_closings": 0,
+      "line_groups": 11255
+    },
+    {
+      "parva": 2,
+      "source_id": "sabhāparva",
+      "chapter_divisions": 103,
+      "separate_closings": 0,
+      "line_groups": 4366
+    },
+    {
+      "parva": 3,
+      "source_id": "araṇyaparva",
+      "chapter_divisions": 315,
+      "separate_closings": 0,
+      "line_groups": 12488
+    },
+    {
+      "parva": 4,
+      "source_id": "virāṭaparva",
+      "chapter_divisions": 78,
+      "separate_closings": 0,
+      "line_groups": 3570
+    },
+    {
+      "parva": 5,
+      "source_id": "udyogaparva",
+      "chapter_divisions": 196,
+      "separate_closings": 0,
+      "line_groups": 6933
+    },
+    {
+      "parva": 6,
+      "source_id": "bhīṣmaparva",
+      "chapter_divisions": 122,
+      "separate_closings": 0,
+      "line_groups": 6023
+    },
+    {
+      "parva": 7,
+      "source_id": "droṇaparva",
+      "chapter_divisions": 203,
+      "separate_closings": 0,
+      "line_groups": 10166
+    },
+    {
+      "parva": 8,
+      "source_id": "karṇaparva",
+      "chapter_divisions": 101,
+      "separate_closings": 1,
+      "line_groups": 5234
+    },
+    {
+      "parva": 9,
+      "source_id": "śalyaparva",
+      "chapter_divisions": 66,
+      "separate_closings": 1,
+      "line_groups": 3730
+    },
+    {
+      "parva": 10,
+      "source_id": "sauptikaparva",
+      "chapter_divisions": 18,
+      "separate_closings": 1,
+      "line_groups": 834
+    },
+    {
+      "parva": 11,
+      "source_id": "strīparva",
+      "chapter_divisions": 27,
+      "separate_closings": 1,
+      "line_groups": 866
+    },
+    {
+      "parva": 12,
+      "source_id": "śāntiparva",
+      "chapter_divisions": 375,
+      "separate_closings": 1,
+      "line_groups": 15521
+    },
+    {
+      "parva": 13,
+      "source_id": "anuśāsanaparva",
+      "chapter_divisions": 274,
+      "separate_closings": 0,
+      "line_groups": 11192
+    },
+    {
+      "parva": 14,
+      "source_id": "āśvamedhikaparva",
+      "chapter_divisions": 118,
+      "separate_closings": 0,
+      "line_groups": 4544
+    },
+    {
+      "parva": 15,
+      "source_id": "mausalaparva",
+      "chapter_divisions": 9,
+      "separate_closings": 0,
+      "line_groups": 302
+    },
+    {
+      "parva": 16,
+      "source_id": "āśramavāsikaparva",
+      "chapter_divisions": 41,
+      "separate_closings": 0,
+      "line_groups": 1101
+    },
+    {
+      "parva": 17,
+      "source_id": "mahāprasthānikaparva",
+      "chapter_divisions": 3,
+      "separate_closings": 0,
+      "line_groups": 112
+    },
+    {
+      "parva": 18,
+      "source_id": "svargārohaṇaparva",
+      "chapter_divisions": 6,
+      "separate_closings": 0,
+      "line_groups": 338
+    }
+  ],
+  "rendered_elements": {
+    "head": 2336,
+    "p": 8357,
+    "pb": 1,
+    "div": 2327,
+    "lg": 98575,
+    "l": 198034,
+    "seg": 41251,
+    "anchor": 550,
+    "note": 9,
+    "lb": 2
+  },
+  "independent_collation": false
+}
