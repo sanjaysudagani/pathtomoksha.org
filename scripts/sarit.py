@@ -5,7 +5,7 @@ from html import escape
 from pathlib import Path
 import gzip
 import json
-import re
+from study import study_html
 import xml.etree.ElementTree as ET
 
 SOURCE = Path('sources/mahabharata-devanagari.xml.gz')
@@ -38,12 +38,7 @@ def render(node, counts):
     if tag == 'lg':
         lines = [' '.join(''.join(line.itertext()).split()) for line in node.findall('{*}l')]
         latin = '<br>'.join(escape(transliterate(line)) for line in lines)
-        study = ''
-        if locator == 'adi-1-1-1':
-            study = ('<h2>Synonyms · draft</h2><p><i>namaskṛtya</i> — having bowed to; '
-                     '<i>tataḥ</i> — then.</p><h2>Translation · draft</h2>'
-                     '<p><strong>Having bowed to Nārāyaṇa, to Nara, best among men, and to the goddess Sarasvatī, '
-                     'one should then recite the Jaya.</strong></p><p>The parenthetical reading “Vyāsa” awaits review.</p>')
+        study = study_html(locator)
         return f'<article class="verse"{anchor}><small>{escape(locator)}</small><div class="sanskrit" lang="sa">{content}</div><p class="iast" lang="sa-Latn"><i>{latin}</i></p>{study}</article>'
     element = {'head':'h2', 'p':'p', 'l':'div', 'div':'section','note':'small'}.get(tag,'span')
     return f'<{element}{anchor} lang="sa">{content}</{element}>'
@@ -58,7 +53,8 @@ def build_corpus(page, study_link=True):
     for book in body:
         number = int(book.get('n'))
         path = f'mahabharata/sarit/{number}'
-        label = book.get(ID)
+        label = ('Ādi', 'Sabhā', 'Araṇya', 'Virāṭa', 'Udyoga', 'Bhīṣma', 'Droṇa', 'Karṇa', 'Śalya', 'Sauptika', 'Strī', 'Śānti', 'Anuśāsana', 'Āśvamedhika', 'Mausala', 'Āśramavāsika', 'Mahāprasthānika', 'Svargārohaṇa')[number-1] + ' Parva'
+        sections = [i for i, child in enumerate(book) if child.tag.endswith('}div')]
         books.append(f'<li><a href="/{path}/">{escape(label)}</a></li>')
         entries = []
         chapters = closing = 0
@@ -73,18 +69,29 @@ def build_corpus(page, study_link=True):
             else:
                 assert node.get('type') == 'closing'
                 closing += 1
-            title = locator or 'Closing material'
+            heading = node.find('{*}head')
+            title = ' '.join(''.join(heading.itertext()).split()) if heading is not None else locator or 'Closing material'
+            if title.startswith('अध्यायः '):
+                title = 'Chapter ' + title.split(' ', 1)[1].lstrip('0')
+            position = sections.index(seq)
+            links = []
+            if position:
+                links.append(f'<a rel="prev" href="../section-{sections[position-1]+1}/">← Previous</a>')
+            links.append('<a href="../">All chapters</a>')
+            if position + 1 < len(sections):
+                links.append(f'<a rel="next" href="../section-{sections[position+1]+1}/">Next →</a>')
+            pager = '<nav class="pager" aria-label="Chapter navigation">' + ' '.join(links) + '</nav>'
             route = f'section-{seq+1}'
             entries.append(f'<p><a href="{route}/">{escape(title)}</a></p>')
             page(f'{path}/{route}', title,
-                 f'<nav><a href="../">{escape(label)}</a></nav><h1>{escape(title)}</h1><p>Automatic transliteration. English translation and word meanings await editorial review.</p>'
-                 + render(node, counts) + CREDIT)
+                 f'<nav><a href="../../../">Mahābhārata</a> / <a href="../">{escape(label)}</a></nav><h1>{escape(title)}</h1>{pager}<p class="muted">Sanskrit with automatic transliteration. English study notes appear where available.</p>'
+                 + render(node, counts) + pager + CREDIT)
         page(path,label,'<nav><a href="../../">Mahābhārata</a></nav><h1>'+escape(label)+'</h1>'+''.join(entries)+CREDIT)
-        records.append(dict(parva=number, source_id=label, chapter_divisions=chapters,
+        records.append(dict(parva=number, source_id=book.get(ID), chapter_divisions=chapters,
                             separate_closings=closing, line_groups=counts['lg']-before))
     expected = Counter(n.tag.split('}')[-1] for n in body.iter())
     assert expected == counts + Counter(body=1,div=len(books))
-    page('mahabharata','Mahābhārata','<h1>Mahābhārata</h1><p>Read the eighteen parvas of the Kumbhakonam edition in source order.</p><ol>'+''.join(books)+'</ol>'+('<a href="adi/1/">Opening invocation with English draft and glosses</a>' if study_link else '')+CREDIT)
+    page('mahabharata','Mahābhārata','<h1>Mahābhārata</h1><p>Read the eighteen parvas of the Kumbhakonam edition in source order.</p><ol class="catalog">'+''.join(books)+'</ol>'+('<a href="adi/1/">Opening invocation with English draft and glosses</a>' if study_link else '')+CREDIT)
     report = dict(edition='Kumbhakonam SARIT',sha256=HASH,raw_bytes=len(raw),
                   parvas=records, rendered_elements=counts, independent_collation=False)
     Path('docs/sarit-inventory.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
