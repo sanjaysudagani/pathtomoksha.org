@@ -1,6 +1,6 @@
 # Current full-edition status
 
-The SARIT Kumbhakonam XML is archived in sources/mahabharata-devanagari.xml.gz. The build verifies the SHA-256 of its decompressed bytes and renders the entire TEI body. All 18 parvas, 2,315 direct chapter divisions, five separate closing divisions, and 98,575 line groups are present. Four nested divisions are retained inside their parent pages. Source and rendered line-group counts agree. A line group can contain speaker or introductory material. Chapter numbering and edition completeness await independent inventory review. The digital source gives CC BY-SA 3.0 in its own header. Automatic transliteration is unreviewed. The standalone invocation study page has one draft translation and two draft glosses. Reviewed English coverage is zero. No production deployment.
+The SARIT Kumbhakonam XML is archived in sources/mahabharata-devanagari.xml.gz. The build verifies the SHA-256 of its decompressed bytes and renders the entire TEI body. All 18 parvas, 2,315 direct chapter divisions, five separate closing divisions, and 98,575 line groups are present. Four nested divisions are retained inside their parent pages. Source and rendered line-group counts agree. A line group can contain speaker or introductory material. Chapter numbering and edition completeness await independent inventory review. The digital source gives CC BY-SA 3.0 in its own header. Automatic transliteration is unreviewed. The production reader includes original English translations and contextual glosses for the five opening units adi-1-1-0 through adi-1-1-4. Reviewed English coverage is zero. Production is hosted on Cloudflare at https://pathtomoksha.org/.
 
 ## Earlier excerpt milestone
 
@@ -13,4 +13,4 @@ Implemented: static navigation, excerpt reader, local inventory and baseline che
 
 ## Open-source distribution
 
-The release is generated in dist/ from the pinned SARIT XML. The previous public/ directory is the local study preview. GitHub CI and the Cloudflare build run the full corpus regression suite. Remote CI, domain routing, production headers and rollback await the first connected deployment.
+The release is generated in dist/ from the pinned SARIT XML. The previous public/ directory is the local study preview. GitHub CI and the Cloudflare build run the full corpus regression suite. GitHub Actions and Cloudflare builds run the release suite. Production domain routing has been verified. A rollback drill remains pending.
