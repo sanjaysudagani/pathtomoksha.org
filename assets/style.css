@@ -1,0 +1,8 @@
+:root{color-scheme:light;color:#302d23;background:#faf7ed;font:18px/1.65 Georgia,serif}body{max-width:68rem;margin:auto;padding:0 5vw}header{padding:1.4rem 0;border-bottom:1px solid #c9bfa9;font-size:1.4rem}main{max-width:45rem;margin:8vh auto}h1{font-size:clamp(2.7rem,7vw,5.5rem);line-height:1.04;font-weight:400;margin:.4em 0}h2{font-size:1.4rem}a{color:#773e27;text-underline-offset:.22em}article{border-block:1px solid #c9bfa9;padding:1.5rem 0}small,nav{font: .9rem/1.6 system-ui}blockquote{margin:1rem 0;font-size:clamp(1.25rem,3vw,1.85rem)}:focus-visible{outline:3px solid #735420}
+
+.verse .sanskrit, .verse .iast { text-align: center; }
+.verse .sanskrit { font-size: clamp(1.25rem, 3vw, 1.8rem); line-height: 1.85; }
+.verse .iast { font-size: 1.12rem; margin: 1.5rem 0 2.75rem; }
+.verse h2 { margin: 2rem 0 .5rem; }
+.verse h2 + p { margin-top: 0; }
+.skip{position:absolute;left:-10000px}.skip:focus{position:static}h1{overflow-wrap:anywhere}.verse{overflow-wrap:anywhere}
