@@ -53,13 +53,30 @@ class ReleaseTests(unittest.TestCase):
         route, anchor = start.split('#')
         chapter = (Path('dist') / route.strip('/') / 'index.html').read_text()
         self.assertIn(f'id="{anchor}"', chapter)
-        self.assertEqual(chapter.count('<h3>Translation</h3>'), len(NOTES))
-        self.assertEqual(chapter.count('<h3>Synonyms</h3>'), len(NOTES))
+        expected = sum(chapter.count(f'id="{locator}"') for locator in NOTES)
+        self.assertEqual(chapter.count('<h3>Translation</h3>'), expected)
+        self.assertEqual(chapter.count('<h3>Synonyms</h3>'), expected)
         following = re.search(r'rel="next" href="([^"]+)"', chapter).group(1)
         next_path = urljoin(route, following)
         next_chapter = (Path('dist') / next_path.strip('/') / 'index.html').read_text()
         previous = re.search(r'rel="prev" href="([^"]+)"', next_chapter).group(1)
         self.assertEqual(urljoin(next_path, previous), route)
+
+    def test_study_notes_have_unique_source_anchors(self):
+        from study import NOTES
+        with gzip.open(SOURCE) as stream:
+            body = ET.parse(stream).find('.//{*}body')
+        matches = {}
+        for node in body.iterfind('.//{*}lg'):
+            locator = node.get(ID)
+            if locator in NOTES:
+                matches[locator] = matches.get(locator, 0) + 1
+        self.assertEqual(matches, dict.fromkeys(NOTES, 1))
+        for locator, (glosses, translation) in NOTES.items():
+            self.assertTrue(translation.strip(), locator)
+            self.assertTrue(glosses, locator)
+            for word, meaning in glosses:
+                self.assertTrue(word.strip() and meaning.strip(), locator)
 
     def test_transliteration(self):
         for source, expected in [('धर्मक्षेत्रे', 'dharmakṣetre'), ('अध्यायः', 'adhyāyaḥ'), ('जयम्', 'jayam')]:
