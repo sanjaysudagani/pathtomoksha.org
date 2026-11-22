@@ -1,0 +1,31 @@
+"""Build the open-source distribution into a clean staging directory."""
+from html import escape
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import shutil
+from sarit import build_corpus
+
+ROOT = Path(__file__).resolve().parents[1]
+
+def build():
+    output = ROOT / 'dist'
+    with TemporaryDirectory(dir=ROOT) as tmp:
+        stage = Path(tmp) / 'site'
+        shutil.copytree(ROOT / 'assets', stage)
+        def page(path, title, body):
+            target = stage / path / 'index.html'
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)} · Path to Moksha</title><link rel="stylesheet" href="/style.css"></head><body><a class="skip" href="#reading">Skip to reading</a><header><a href="/">Path to Moksha</a></header><main id="reading">{body}</main></body></html>''', encoding='utf-8')
+        page('', 'Scripture library', '<h1>Read the Sanskrit scriptures</h1><article><h2><a href="/mahabharata/">Mahābhārata</a></h2><p>Read the eighteen parvas of the Kumbhakonam edition in Sanskrit with Roman transliteration.</p></article>')
+        build_corpus(page, study_link=False)
+        if output.exists():
+            output.rename(Path(tmp) / 'previous')
+        try:
+            stage.rename(output)
+        except OSError:
+            if (Path(tmp) / 'previous').exists():
+                (Path(tmp) / 'previous').rename(output)
+            raise
+
+if __name__ == '__main__':
+    build()
