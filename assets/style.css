@@ -6,3 +6,20 @@
 .verse h2 { margin: 2rem 0 .5rem; }
 .verse h2 + p { margin-top: 0; }
 .skip{position:absolute;left:-10000px}.skip:focus{position:static}h1{overflow-wrap:anywhere}.verse{overflow-wrap:anywhere}
+
+:root {color:#282c24;background:#faf8f0}
+header {display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:4px solid #823924}
+header a {font:600 .95rem system-ui;text-decoration:none}
+header .brand {font:1.65rem Georgia,serif}
+main {max-width:52rem;margin:3.5rem auto}
+.hero {padding:clamp(1.5rem,5vw,4.5rem);background:#ede9db;border-block:1px solid #b7aa90}
+.hero [lang=sa] {font-size:2rem;color:#853c27;margin-bottom:0}
+.primary {display:inline-block;padding:.7rem 1rem;background:#733722;color:white;margin:.7rem 1rem .7rem 0;border-radius:.25rem}
+.catalog {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:.6rem 2.3rem;padding-left:2rem}
+.catalog li {border-bottom:1px solid #cfc8b7;padding:.7rem .1rem}
+.pager {display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1rem 0;border-block:1px solid #cfc8b7}
+.study {max-width:38rem;margin:1.5rem auto;padding:1.2rem clamp(.8rem,3vw,2rem);background:#f1eee3;border-left:3px solid #9c603f}
+.study h3 {margin:1rem 0 .35rem}.study p {margin:.3rem 0 1rem}
+.verse .iast {color:#5c5349}.verse:target {border-top:3px solid #9c603f}
+footer,.muted {font: .92rem/1.6 system-ui;color:#534e43}footer {margin-top:3rem}
+@media(max-width:34rem){main{margin:2rem auto}header .brand{font-size:1.35rem}.verse .sanskrit{line-height:1.7}}
