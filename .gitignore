@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+/dist/
+/public/
+/fixtures/
+/scripts/study_preview.py
+/docs/excerpt-inventory.json
+.env*
+.dev.vars*
+.wrangler/
+node_modules/
