@@ -5,7 +5,7 @@ from html import escape
 from pathlib import Path
 import gzip
 import json
-from study import study_html
+from study import NOTES, study_html
 import xml.etree.ElementTree as ET
 
 SOURCE = Path('sources/mahabharata-devanagari.xml.gz')
@@ -83,9 +83,16 @@ def build_corpus(page, study_link=True):
             pager = '<nav class="pager" aria-label="Chapter navigation">' + ' '.join(links) + '</nav>'
             route = f'section-{seq+1}'
             entries.append(f'<p><a href="{route}/">{escape(title)}</a></p>')
+            translated = sum(group.get(ID) in NOTES for group in node.iterfind('.//{*}lg'))
+            message = (f'{translated} passages have draft English translations in this chapter.'
+                       if translated else 'English translation is pending for this section. Select Sanskrit or transliteration to read the source.')
+            controls = '<fieldset class="layers"><legend>Reading options</legend>' + ''.join(
+                f'<label><input type="checkbox" id="show-{key}"> {name}</label>'
+                for key, name in [('sa','Sanskrit'), ('iast','Roman transliteration'), ('words','Word meanings')]
+            ) + '</fieldset>'
             page(f'{path}/{route}', title,
-                 f'<nav><a href="../../../">Mahābhārata</a> / <a href="../">{escape(label)}</a></nav><h1>{escape(title)}</h1>{pager}<p class="muted">Sanskrit with automatic transliteration. English study notes appear where available.</p>'
-                 + render(node, counts) + pager + CREDIT)
+                 f'<nav><a href="../../../">Mahābhārata</a> / <a href="../">{escape(label)}</a></nav><h1>{escape(title)}</h1>{pager}{controls}<p class="muted">{message}</p><div class="reading-text">'
+                 + render(node, counts) + '</div>' + pager + CREDIT)
         page(path,label,'<nav><a href="../../">Mahābhārata</a></nav><h1>'+escape(label)+'</h1>'+''.join(entries)+CREDIT)
         records.append(dict(parva=number, source_id=book.get(ID), chapter_divisions=chapters,
                             separate_closings=closing, line_groups=counts['lg']-before))

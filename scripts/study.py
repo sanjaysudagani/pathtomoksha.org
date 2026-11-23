@@ -187,6 +187,96 @@ NOTES.update({'adi-1-1-5': ([('romaharṣaṇa-putraḥ', 'son of Romaharṣaṇ
                 '—to the region where the Kurus and the Pāṇḍavas fought their battle long ago.” The '
                 'final words concerning the other participants are unclear in this transcription.')})
 
+NOTES.update({'adi-1-1-20': ([('didṛkṣuḥ', 'wishing to see'),
+                 ('āgataḥ', 'I have come'),
+                 ('tasmāt', 'from there'),
+                 ('samīpam', 'into the presence'),
+                 ('iha', 'here'),
+                 ('āyuṣmantaḥ', 'long-lived ones'),
+                 ('sarve eva', 'all of you'),
+                 ('me matāḥ', 'are regarded by me'),
+                 ('asmin yajñe', 'at this sacrifice'),
+                 ('sūrya-pāvaka-varcasaḥ', 'radiant as the sun and fire')],
+                '“From there I have come here, wishing to see you. Long-lived sages, you shine at this '
+                'sacrifice like the sun and fire.” Several forms in the intervening address are '
+                'uncertain in this transcription.'),
+ 'adi-1-1-21': ([('kṛtābhiṣekāḥ', 'having bathed'),
+                 ('śucayaḥ', 'purified'),
+                 ('kṛtajapyāḥ', 'having completed your recitations'),
+                 ('hutāgnayaḥ', 'having made your fire offerings'),
+                 ('bhavantaḥ', 'you'),
+                 ('āsate', 'sit'),
+                 ('svasthāḥ', 'at ease'),
+                 ('bravīmi', 'shall I tell'),
+                 ('kim', 'what'),
+                 ('aham', 'I'),
+                 ('dvijāḥ', 'twice-born ones')],
+                '“You have bathed, purified yourselves, recited your prayers, and made your offerings '
+                'into the fire. Now that you are seated at ease, what shall I tell you, O twice-born '
+                'ones?'),
+ 'adi-1-1-22': ([('purāṇa-saṃhitāḥ', 'collections of ancient lore'),
+                 ('puṇyāḥ kathāḥ', 'sacred stories'),
+                 ('dharma-artha-saṃśritāḥ', 'concerned with duty and worldly good'),
+                 ('itivṛttam', 'the history'),
+                 ('narendrāṇām', 'of kings'),
+                 ('ṛṣīṇām', 'of sages'),
+                 ('ca', 'and'),
+                 ('mahātmanām', 'great-souled'),
+                 ('ṛṣayaḥ ūcuḥ', 'the sages said')],
+                '“Would you hear collections of ancient lore, sacred stories of duty and worldly good, '
+                'or the history of kings and great sages?” The sages replied.'),
+ 'adi-1-1-23': ([('dvaipāyanena', 'by Dvaipāyana'),
+                 ('yat proktam', 'which was told'),
+                 ('purāṇam', 'the ancient account'),
+                 ('parama-ṛṣiṇā', 'by the eminent sage'),
+                 ('suraiḥ', 'by the gods'),
+                 ('brahma-ṛṣibhiḥ', 'by the brahmin sages'),
+                 ('ca eva', 'and also'),
+                 ('śrutvā', 'after hearing'),
+                 ('abhipūjitam', 'held in reverence')],
+                '“The ancient account that the great sage Dvaipāyana told won the reverence of the '
+                'gods and brahmin sages who heard it.'),
+ 'adi-1-1-24': ([('tasya', 'of that'),
+                 ('ākhyāna-variṣṭhasya', 'most excellent of narratives'),
+                 ('vicitra-pada-parvaṇaḥ', 'varied in wording and divisions'),
+                 ('sūkṣma-artha-nyāya-yuktasya', 'endowed with subtle meanings and reasoning'),
+                 ('veda-arthaiḥ', 'with the meanings of the Vedas'),
+                 ('bhūṣitasya', 'adorned'),
+                 ('ca', 'and')],
+                '“That finest of narratives has many kinds of expression and many divisions. It '
+                'contains subtle meanings and arguments and is adorned with the teachings of the '
+                'Vedas.'),
+ 'adi-1-1-25': ([('bhāratasya itihāsasya', 'of the Bhārata history'),
+                 ('puṇyām', 'sacred'),
+                 ('grantha-artha-saṃyutām', 'uniting text and meaning'),
+                 ('saṃskāra-upagatām', 'refined in expression'),
+                 ('brāhmīm', 'sacred utterance'),
+                 ('nānā-śāstra-upabṛṃhitām', 'enriched by many disciplines')],
+                '“The account we seek is the sacred telling of the Bhārata history, rich in text and '
+                'meaning, refined in expression and enriched by many branches of learning.'),
+ 'adi-1-1-26': ([('janamejayasya rājñaḥ', 'to King Janamejaya'),
+                 ('yām', 'which'),
+                 ('vaiśampāyanaḥ', 'Vaiśampāyana'),
+                 ('uktavān', 'recounted'),
+                 ('yathāvat', 'faithfully'),
+                 ('sa ṛṣiḥ', 'that sage'),
+                 ('pṛṣṭaḥ', 'when asked'),
+                 ('satre', 'at the sacrificial session'),
+                 ('dvaipāyana-ājñayā', 'at Dvaipāyana’s command')],
+                '“When King Janamejaya asked him at the sacrifice, the sage Vaiśampāyana faithfully '
+                'recounted it at Dvaipāyana’s command.'),
+ 'adi-1-1-27': ([('vedaiḥ caturbhiḥ', 'with the four Vedas'),
+                 ('sayuktām', 'joined'),
+                 ('vyāsasya', 'of Vyāsa'),
+                 ('adbhuta-karmaṇaḥ', 'whose deeds are wondrous'),
+                 ('saṃhitām', 'the collection'),
+                 ('śrotum icchāmaḥ', 'we wish to hear'),
+                 ('puṇyām', 'sacred'),
+                 ('pāpa-bhaya-apahām', 'dispelling fear of wrongdoing'),
+                 ('sautiḥ uvāca', 'Sauti said')],
+                '“We wish to hear that sacred collection of Vyāsa, whose deeds are wondrous. It is '
+                'joined with the four Vedas and dispels the fear of wrongdoing.” Sauti replied.')})
+
 def study_html(locator):
     if locator not in NOTES:
         return ''
