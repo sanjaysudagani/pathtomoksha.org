@@ -23,3 +23,17 @@ main {max-width:52rem;margin:3.5rem auto}
 .verse .iast {color:#5c5349}.verse:target {border-top:3px solid #9c603f}
 footer,.muted {font: .92rem/1.6 system-ui;color:#534e43}footer {margin-top:3rem}
 @media(max-width:34rem){main{margin:2rem auto}header .brand{font-size:1.35rem}.verse .sanskrit{line-height:1.7}}
+
+.shelf{display:grid;grid-template-columns:minmax(10rem, .8fr) 1.2fr;gap:clamp(1.5rem,5vw,4rem);align-items:center;padding:clamp(1.4rem,4vw,3rem);background:linear-gradient(125deg,#e8d3ad,#faf2df);border:1px solid #d8c6a8}
+.shelf h1{font-size:clamp(2.7rem,5vw,4.4rem)}.shelf a:not(.book-cover){display:inline-block;margin:.35rem .5rem .35rem 0}
+.book-cover{display:block;transform:rotate(-2deg);transition:transform .2s}.book-cover:hover,.book-cover:focus-visible{transform:rotate(0)}
+.book-cover img{display:block;width:100%;height:auto;box-shadow:6px 10px 18px #3825104d;border-radius:2px 5px 5px 2px}.edition,.layers legend{font:600 .9rem/1.5 system-ui;color:#724025}
+.layers{display:flex;flex-wrap:wrap;gap:.4rem .8rem;border:1px solid #d9cbb7;border-radius:.4rem;margin:1.3rem 0;padding:.4rem .9rem .7rem}.layers label{font: .95rem/2 system-ui;cursor:pointer}.layers input{accent-color:#763c2a}
+.reading-text .verse{display:none;padding:.7rem 0;border:0}.reading-text .verse:has(.study){display:block}
+.reading-text .sanskrit,.reading-text .iast,.reading-text [lang="sa"]:not(section),.reading-text .study h3,.reading-text .study h3:first-of-type+p,.reading-text .study small{display:none}
+.reading-text .study{margin:0;padding:0;background:none;border:0}.reading-text .study strong{font-weight:400}.reading-text .verse>small{color:#893d28}
+main:has(#show-sa:checked) .reading-text .verse,main:has(#show-iast:checked) .reading-text .verse{display:block}
+main:has(#show-sa:checked) .reading-text [lang="sa"]:not(section){display:revert}
+main:has(#show-iast:checked) .reading-text .iast,main:has(#show-words:checked) .reading-text .study h3:first-of-type,main:has(#show-words:checked) .reading-text .study h3:first-of-type+p{display:block}
+@media(max-width:620px){.shelf{grid-template-columns:1fr;text-align:center}.book-cover{width:min(55%,13rem);margin:auto}.layers{display:grid}}
+@media(prefers-reduced-motion:reduce){.book-cover{transition:none}}
