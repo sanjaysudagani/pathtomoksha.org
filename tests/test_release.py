@@ -20,7 +20,7 @@ class SanskritReader(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
-        if tag in ('br', 'meta', 'link'):
+        if tag in ('br', 'meta', 'link', 'input', 'img'):
             return
         starts = tag == 'div' and attrs.get('class') == 'sanskrit'
         exclude = attrs.get('class') == 'iast' or (tag == 'small' and self.stack and self.stack[-1][0] == 'article')
@@ -77,6 +77,20 @@ class ReleaseTests(unittest.TestCase):
             self.assertTrue(glosses, locator)
             for word, meaning in glosses:
                 self.assertTrue(word.strip() and meaning.strip(), locator)
+
+    def test_reading_options_and_cover(self):
+        root = Path('dist')
+        home = (root / 'index.html').read_text()
+        self.assertIn('class="book-cover" href="/mahabharata/"', home)
+        self.assertTrue((root / 'vyasa-ganesha.jpg').stat().st_size > 0)
+        chapters = list(root.glob('mahabharata/sarit/*/section-*/index.html'))
+        self.assertEqual(len(chapters), 2320)
+        for chapter in chapters:
+            html = chapter.read_text()
+            for key in ('sa', 'iast', 'words'):
+                self.assertIn(f'<input type="checkbox" id="show-{key}">', html, chapter)
+            if '<section class="study">' not in html:
+                self.assertIn('English translation is pending', html, chapter)
 
     def test_transliteration(self):
         for source, expected in [('धर्मक्षेत्रे', 'dharmakṣetre'), ('अध्यायः', 'adhyāyaḥ'), ('जयम्', 'jayam')]:
