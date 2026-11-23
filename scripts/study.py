@@ -277,6 +277,34 @@ NOTES.update({'adi-1-1-20': ([('didṛkṣuḥ', 'wishing to see'),
                 '“We wish to hear that sacred collection of Vyāsa, whose deeds are wondrous. It is '
                 'joined with the four Vedas and dispels the fear of wrongdoing.” Sauti replied.')})
 
+# Sauti's invocation forms one sentence across four source groups.
+NOTES.update({
+    'adi-1-1-28': ([
+        ('ādyam puruṣam', 'the primeval Person'), ('īśānam', 'the Lord'),
+        ('puruhūtam', 'called upon by many'), ('puruṣṭutam', 'praised by many'),
+        ('ṛtam', 'truth'), ('ekākṣaram brahma', 'Brahman of the single syllable'),
+        ('vyakta-avyaktam', 'manifest and unmanifest'), ('sanātanam', 'eternal'),
+    ], 'I bow to the primeval Person, the Lord whom many invoke and praise, to truth, to Brahman of the single syllable, manifest and unmanifest, eternal.'),
+    'adi-1-1-29': ([
+        ('asat ca sat ca', 'both nonbeing and being'), ('eva ca yat', 'and that very thing which is'),
+        ('viśvam', 'the universe'), ('sat-asataḥ param', 'beyond being and nonbeing'),
+        ('para-avarāṇām', 'of higher and lower things'), ('sraṣṭāram', 'the creator'),
+        ('purāṇam', 'ancient'), ('param', 'supreme'), ('avyayam', 'imperishable'),
+    ], 'He is nonbeing and being, the whole universe and what lies beyond being and nonbeing, the creator of things high and low, ancient, supreme and imperishable.'),
+    'adi-1-1-30': ([
+        ('maṅgalyam', 'auspicious'), ('maṅgalam', 'auspiciousness itself'),
+        ('viṣṇum', 'Viṣṇu'), ('vareṇyam', 'worthy of being chosen'), ('anagham', 'faultless'),
+        ('śucim', 'pure'), ('namaskṛtya', 'having bowed to'), ('hṛṣīkeśam', 'the Lord of the senses'),
+        ('cara-acara-gurum', 'teacher of all that moves and all that stands still'), ('harim', 'Hari'),
+    ], 'I pay homage to Viṣṇu, auspiciousness itself, worthy of reverence, faultless and pure. He is Hari, Lord of the senses, teacher of all that moves and all that stands still.'),
+    'adi-1-1-31': ([
+        ('maharṣeḥ', 'of the great sage'), ('pūjitasya', 'honoured'), ('iha', 'here'),
+        ('sarva-lokaiḥ', 'by all worlds'), ('mahātmanaḥ', 'great of soul'),
+        ('pravakṣyāmi', 'I shall recount'), ('matam', 'the teaching'), ('puṇyam', 'sacred'),
+        ('vyāsasya', 'of Vyāsa'), ('adbhuta-karmaṇaḥ', 'whose deeds are wondrous'),
+    ], 'I shall now recount the sacred teaching of the great sage Vyāsa, whose deeds are wondrous and whom all worlds honour.'),
+})
+
 def study_html(locator):
     if locator not in NOTES:
         return ''
