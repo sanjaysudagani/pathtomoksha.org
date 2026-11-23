@@ -312,3 +312,58 @@ def study_html(locator):
     gloss = '; '.join(f'<i lang="sa-Latn">{escape(word)}</i> — {escape(value)}' for word, value in words)
     note = '<p>The source includes Vyāsa in parentheses. This draft follows the main reading.</p>' if locator == 'adi-1-1-1' else ''
     return f'<section class="study"><small>English study notes · draft</small><h3>Synonyms</h3><p>{gloss}.</p><h3>Translation</h3><p><strong>{escape(meaning)}</strong></p>{note}</section>'
+
+# The invocation is group zero in the Kumbhakonam transcription.
+_departure = [
+    ("śrī-vedavyāsāya namaḥ|homage to revered Vedavyāsa; jayam|Jaya, the epic", "Homage to revered Vedavyāsa. Having bowed to Nārāyaṇa, to Nara, best of men, to the goddess Sarasvatī and to Vyāsa, one should recite Jaya."),
+    ("mausalam āhavam|the battle with clubs; divaṃ gate|when he had gone to heaven", "Janamejaya asked, “When the Pāṇḍavas heard of the battle with clubs among the Vṛṣṇis and Andhakas, and Kṛṣṇa had gone to heaven, what did they do?” Vaiśampāyana replied."),
+    ("kadanaṃ mahat|the great slaughter; prasthāne|on departure", "When the Kuru king heard of the slaughter of the Vṛṣṇis, he set his mind on departure and spoke to Arjuna."),
+    ("kālaḥ pacati|time ripens or consumes; kālapāśam|the noose of time", "“Time consumes all beings, wise one. I think this is the noose of time. You too should see it.”"),
+    ("kālaḥ kālaḥ|time, time; bhrātuḥ jyeṣṭhasya|of his eldest brother", "“Time, indeed, time,” said Kuntī’s son, agreeing with the words of his wise elder brother."),
+    ("yamau|the twins; savyasācinā|by the ambidextrous archer", "Learning Arjuna’s mind, Bhīmasena and the twins agreed with what the ambidextrous archer had said."),
+    ("pravrajan|setting out in renunciation; vaiśyāputre|to the son of the Vaiśya woman", "Intent on dharma as he renounced worldly life, Yudhiṣṭhira summoned Yuyutsu, the son of a Vaiśya woman, and entrusted the whole kingdom to him."),
+    ("abhiṣicya|having consecrated; duḥkhārtaḥ|stricken with sorrow", "After consecrating Parikṣit as king in his own realm, the eldest Pāṇḍava turned in grief to Subhadrā."),
+    ("putrasya putraḥ|son’s son; pariśeṣaḥ|survivor", "“This grandson of yours will be king of the Kurus. Vajra, survivor of the Yadus, has also been made king."),
+    ("śakraprasthe|at Śakraprastha; rakṣyaḥ|to be protected", "“Parikṣit will rule in Hastinapura and the Yādava king Vajra in Śakraprastha. Give them your protection, and never set your heart on wrongdoing.”"),
+    ("mātulasya|of his maternal uncle; vṛddhasya|aged", "Having spoken, the king turned to the rites for wise Vāsudeva, for his aged maternal uncle, and for Rāma and the others."),
+    ("udakam|a water offering; śrāddhāni|rites for the dead", "With his brothers the righteous king offered water and diligently performed the prescribed ancestral rites for them all."),
+    ("tapodhanam|rich in austerities; abhojayat|he fed", "In honour of Hari, he praised the bearer of the Śārṅga bow and served fine food to Dvaipāyana, Nārada, the ascetic Mārkaṇḍeya, Bhāradvāja and Yājñavalkya."),
+    ("ratnāni|jewels; grāmān|villages; dvijamukhyebhyaḥ|to the foremost of the twice-born", "To the foremost brahmins he gave jewels, garments, villages, horses and chariots. The account also numbers women among his gifts, and reckons them by the hundred thousand."),
+    ("gurum|teacher; śiṣyam|pupil", "He summoned Kṛpa, the teacher honoured by the townspeople, seated him with respect, and entrusted Parikṣit to him as his pupil."),
+    ("prakṛtīḥ|the constituents of the realm; cikīrṣitam|what he intended to do", "Yudhiṣṭhira gathered the representatives of the realm and told them everything he intended to do."),
+    ("paurajānapadāḥ|people of town and country; nābhyanandanta|did not welcome", "The people of town and country heard him with troubled hearts. They could take no joy in his words."),
+    ("naivaṃ kartavyam|you should not do this; kālaparyāya|the turning of time", "“You should not do this,” they told their ruler. But the king understood what the turning of time required and would not follow their counsel."),
+    ("anumānya|having won their assent; gamanāya|toward departure", "Having sought the people’s assent, the righteous king resolved to leave, moved also by Kṛṣṇa’s departure."),
+    ("vāstuvikrayiṇam|the seller of a property; dhanecchā|desire for wealth", "During a dispute involving the seller of a property, the desire for the wealth arose in several parties at once. The transcription is unclear about their respective claims."),
+    ("prāptaṃ kaliyugam|the age of Kali had arrived; dharmo naṣṭaḥ|dharma is lost", "Recognising that the age of Kali had come, Sahadeva seemed almost to smile as he told the king, “Dharma is lost. Confusion has arisen.”"),
+    ("paryāptaṃ jīvanam|I have lived long enough; valkalāni|bark garments", "Distressed at these words, the king said, “I have lived long enough.” Yudhiṣṭhira, son of Dharma, stripped the ornaments from his body and took up garments of bark."),
+    ("tathaiva|in the same way; yaśasvinī|renowned", "Bhīma, Arjuna, the twins and the renowned Draupadī all took up bark garments too, O king."),
+    ("iṣṭiṃ naiṣṭhikīm|the concluding sacrifice; apsu|in the waters", "They had the final sacrifice performed according to rule, O bull of Bharata’s line. Then those foremost of men relinquished all their sacred fires in the waters and set out."),
+    ("praruruduḥ|they broke into tears; dyūtajitān|defeated at dice", "All the women wept to see the five leave with Draupadī as the sixth, just as they had wept long ago when the brothers went away after losing at dice."),
+    ("harṣaḥ|gladness; vṛṣṇikṣayam|the destruction of the Vṛṣṇis", "The brothers themselves welcomed the journey. They knew Yudhiṣṭhira’s mind and had seen the destruction of the Vṛṣṇis."),
+    ("śvā|a dog; gajasāhvayāt|from the city named for the elephant", "The five brothers went out from Hastinapura with Draupadī as the sixth and a dog as the seventh. The townspeople and the people of the royal household followed them a long way."),
+    ("nivartasva|turn back; nagaravāsinaḥ|city dwellers", "No one could bring himself to tell the king, “Turn back.” At last the people of the city went home."),
+    ("paryavārayan|they gathered around; bhujagātmajā|daughter of a serpent", "Kṛpa and the others gathered around Yuyutsu. Ulūpī, the serpent’s daughter, entered the Gaṅgā, O descendant of Kuru."),
+    ("puraṃ prati|toward the city; mātaraḥ|mothers", "Citrāṅgadā made her way to the city of Maṇalūra. The other mothers who remained gathered around Parikṣit."),
+    ("kṛtopavāsāḥ|having fasted; prāṅmukhāḥ|facing east", "After fasting, the great-hearted Pāṇḍavas and renowned Draupadī set off facing east, O descendant of Kuru."),
+    ("yogayuktāḥ|disciplined in yoga; tyāgadharmam|the practice of renunciation", "Steadfast in yoga and committed to renunciation, they passed through many lands and reached rivers and seas."),
+    ("agre|in front; yathākramam|in order", "Yudhiṣṭhira walked in front. Bhīma followed, then Arjuna close behind him, and then the twins in their order."),
+    ("pṛṣṭhataḥ|at the rear; padmadalekṣaṇā|with eyes like lotus petals", "At the rear walked Draupadī, foremost of women, graceful and dark, her eyes like lotus petals."),
+    ("ekaḥ|alone; krameṇa|by degrees", "One dog followed the Pāṇḍavas as they set out for the forest. In time the heroes reached the great expanse of water called Lauhitya."),
+    ("na mumoca|did not relinquish; akṣayye|inexhaustible", "Arjuna still clung to his treasures, O king. He had kept the divine bow Gāṇḍīva and his two inexhaustible quivers."),
+    ("śailam iva|like a mountain; puruṣavigraham|bearing human form", "There they saw Agni standing before them in human shape. Like a mountain he stood across their path."),
+    ("saptārciḥ|seven-flamed; pāvakam|the purifier, Fire", "The seven-flamed god addressed them. “Ho there, heroic sons of Pāṇḍu! Know me as Fire, the purifier."),
+    ("mahābāho|mighty-armed one; aśvisutau|sons of the Aśvins", "“Mighty-armed Yudhiṣṭhira, Bhīmasena who scorches his foes, Arjuna, and you two brave sons of the Aśvins, hear my words."),
+    ("mayā dagdham|burned by me; prabhāvena|through the power", "“I am Agni, foremost of Kurus. It was I who burned Khāṇḍava through the power of Arjuna and Nārāyaṇa."),
+    ("paramāyudham|supreme weapon; parityajya|laying aside", "“Let your brother Arjuna lay aside Gāṇḍīva, that peerless weapon, and enter the forest. He has no further use for it."),
+    ("cakraratnam|the jewel among discuses; kālena|in due time", "“The precious discus that great-hearted Kṛṣṇa bore has gone. In due time it will come into his hand again."),
+    ("varuṇāt|from Varuṇa; dīyatām|let it be given", "“Long ago I fetched Gāṇḍīva from Varuṇa for Arjuna’s sake. Let that finest of bows be given back to Varuṇa.”"),
+    ("acodayan|they urged; jale|into the water", "All his brothers urged Arjuna to do so, and he cast the bow and the two inexhaustible quivers into the water."),
+    ("antaradhīyata|vanished; dakṣiṇāmukhāḥ|facing south", "Then Agni vanished on the spot, O best of Bharatas, and the heroic Pāṇḍavas turned south."),
+    ("tīreṇa|along the shore; lavaṇāmbhasaḥ|of the salt sea", "Following the northern shore of the salt sea, O tiger among Bharatas, they travelled southwest."),
+    ("paścimāṃ diśam|the west; sāgareṇa pariplutām|submerged by the sea", "Turning west again, they saw Dvārakā submerged beneath the sea."),
+    ("udīcīm|northward; prādakṣiṇyam|a reverential clockwise circuit", "Then those foremost descendants of Bharata turned north. Faithful to the discipline of yoga, they wished to complete a clockwise circuit of the earth."),
+]
+for _number, (_gloss, _english) in enumerate(_departure):
+    NOTES[f'mahAprasthAnika-17-1-{_number}'] = (
+        [pair.split('|', 1) for pair in _gloss.split('; ')], _english)
