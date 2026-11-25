@@ -10,3 +10,7 @@ __pycache__/
 .dev.vars*
 .wrangler/
 node_modules/
+
+/local-translation/
+/.frontend-reference/
+/.reader-test-browser-*/

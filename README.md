@@ -1,6 +1,6 @@
 # Path to Moksha
 
-An open-source Sanskrit reader for all eighteen parvas of the SARIT Kumbhakonam Mahābhārata. Chapters are static HTML with source identifiers and automatic Roman transliteration. Reading requires no account, JavaScript, or database.
+An open Hindu scripture library, starting with the SARIT Kumbhakonam Mahābhārata. The Bhagavad Gītā index points to the eighteen chapters within Bhīṣma Parva. The original Sanskrit is provided as static HTML, with stable source links and optional automatic Roman transliteration. Essential reading works without JavaScript, accounts, or a database.
 
 ## Build and verify
 
@@ -13,6 +13,8 @@ python3 -m http.server 8000 --bind 127.0.0.1 --directory dist
 ```
 
 Open http://127.0.0.1:8000/. The build checks the decompressed XML against a pinned SHA-256 and stages a fresh distribution. Tests compare each rendered Sanskrit line group, including nested groups, against the frozen XML in source order. They check internal page links, asset presence, and selected transliterations. The per-parva counts are in docs/sarit-inventory.json. Independent textual collation and translation review remain pending.
+
+For browser verification, run `node tests/frontend_browser.mjs` after building (Node 22+ and Chrome/Chromium). See [frontend verification](tests/FRONTEND.md). Editorial draft data is not part of the public build.
 
 ## GitHub and Cloudflare
 
