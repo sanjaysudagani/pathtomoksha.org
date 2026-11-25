@@ -81,16 +81,33 @@ class ReleaseTests(unittest.TestCase):
     def test_reading_options_and_cover(self):
         root = Path('dist')
         home = (root / 'index.html').read_text()
-        self.assertIn('class="book-cover" href="/mahabharata/"', home)
+        self.assertIn('class="book" href="/mahabharata/"', home)
+        self.assertIn('class="book" href="/bhagavad-gita/"', home)
+        self.assertIn('id="planned-title">Planned collections', home)
+        self.assertEqual(home.count('class="status">Planned</span>'), 4)
         self.assertTrue((root / 'vyasa-ganesha.jpg').stat().st_size > 0)
         chapters = list(root.glob('mahabharata/sarit/*/section-*/index.html'))
         self.assertEqual(len(chapters), 2320)
         for chapter in chapters:
             html = chapter.read_text()
-            for key in ('sa', 'iast', 'words'):
-                self.assertIn(f'<input type="checkbox" id="show-{key}">', html, chapter)
+            self.assertIn('id="show-iast"', html, chapter)
             if '<section class="study">' not in html:
+                self.assertIn('id="show-sa" checked', html, chapter)
                 self.assertIn('English translation is pending', html, chapter)
+                self.assertNotIn('id="show-words"', html, chapter)
+            else:
+                self.assertIn('id="show-sa">', html, chapter)
+                self.assertIn('id="show-words"', html, chapter)
+
+    def test_gita_uses_attested_chapters_in_the_same_edition(self):
+        root = Path('dist')
+        index = (root / 'bhagavad-gita/index.html').read_text()
+        links = re.findall(r'href="(/mahabharata/sarit/6/section-[0-9]+/)"><span>Chapter ([0-9]+)</span>', index)
+        self.assertEqual([int(number) for _, number in links], list(range(1, 19)))
+        for route, number in links:
+            chapter = (root / route.strip('/') / 'index.html').read_text()
+            self.assertRegex(chapter, rf'भगवद्गीता(?:ध्या|द्या)यः[\s ]+॥[\s ]+{number}[\s ]+॥')
+        self.assertIn('धर्मक्षेत्रे कुरुक्षेत्रे', (root / links[0][0].strip('/') / 'index.html').read_text())
 
     def test_transliteration(self):
         for source, expected in [('धर्मक्षेत्रे', 'dharmakṣetre'), ('अध्यायः', 'adhyāyaḥ'), ('जयम्', 'jayam')]:
@@ -120,7 +137,7 @@ class ReleaseTests(unittest.TestCase):
     def test_internal_links_and_release_assets(self):
         root = Path('dist')
         pages = list(root.rglob('*.html'))
-        self.assertEqual(len(pages), 2340)
+        self.assertEqual(len(pages), 2343)
         for file in pages:
             url = '/' + file.relative_to(root).as_posix()
             for href in re.findall('href="([^"]+)"', file.read_text()):
