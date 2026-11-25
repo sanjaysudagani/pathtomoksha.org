@@ -68,21 +68,30 @@ try {
   await new Promise((ok, bad) => app.listen(0, '127.0.0.1', ok).once('error', bad));
   const base = 'http://127.0.0.1:' + app.address().port;
 
+  const linux = process.platform === 'linux';
+  const chromeEnv = { ...process.env, ...(linux ? {} : { TMPDIR: basedir }) };
+  // The Ubuntu image may have an invalid inherited DBus address; do not
+  // create a DBus dependency for these localhost-only headless tests.
+  if (linux && !/^(unix|tcp|nonce-tcp|autolaunch):/.test(chromeEnv.DBUS_SESSION_BUS_ADDRESS ?? '')) {
+    delete chromeEnv.DBUS_SESSION_BUS_ADDRESS;
+  }
   browser = spawn(findChrome(), [
     '--headless=new', '--remote-debugging-port=0', '--disable-background-networking',
     '--disable-component-update', '--disable-sync', '--no-first-run',
-    '--no-default-browser-check', '--user-data-dir=' + profile, 'about:blank',
-  ], { stdio: ['ignore', 'ignore', 'pipe'], env: { ...process.env, TMPDIR: basedir } });
+    '--no-default-browser-check', '--user-data-dir=' + profile,
+    ...(linux ? ['--disable-dev-shm-usage'] : []), 'about:blank',
+  ], { stdio: ['ignore', 'ignore', 'pipe'], env: chromeEnv });
   let stderr = '';
   browser.on('error', error => { stderr += String(error); });
   browser.stderr.on('data', data => { stderr = (stderr + String(data)).slice(-2500); });
   const exited = new Promise(resolve => { browser.once('exit', resolve); browser.once('error', resolve); });
   let info;
-  for (let attempt = 0; attempt < 80 && !info; attempt++) {
+  const deadline = Date.now() + (process.env.CI ? 45_000 : 12_000);
+  while (!info && Date.now() < deadline && browser.exitCode === null && browser.signalCode === null) {
     try { info = await readFile(join(profile, 'DevToolsActivePort'), 'utf8'); }
     catch { await sleep(100); }
   }
-  assert(info, 'Chrome did not start. ' + stderr);
+  assert(info, 'Chrome did not start (exit=' + browser.exitCode + ', signal=' + browser.signalCode + '). ' + stderr);
   const port = info.split('\n')[0];
   const targets = await (await fetch('http://127.0.0.1:' + port + '/json/list')).json();
   cdp = new WebSocket(targets.find(target => target.type === 'page').webSocketDebuggerUrl);
