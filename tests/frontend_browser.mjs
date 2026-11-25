@@ -251,7 +251,13 @@ try {
         assert(contrast(roles[0], roles[1]) >= 4.5, theme + ': body button text contrast');
         assert(contrast(roles[2], roles[3]) >= 3, theme + ': control outline contrast');
         await evaluate('document.documentElement.style.fontSize = "200%"');
-        assert(await hasNoOverflow(), theme + ': source chapter overflows at 200% text size');
+        if (!await hasNoOverflow()) {
+          const offenders = await evaluate(`[...document.querySelectorAll('body *')].filter(element => {
+            const r = element.getBoundingClientRect();
+            return r.right > innerWidth + 1 || element.clientWidth && element.scrollWidth > element.clientWidth + 2;
+          }).slice(0, 15).map(element => [element.tagName, element.className, Math.round(element.getBoundingClientRect().right), element.scrollWidth])`);
+          assert.fail(theme + ': source chapter overflows at 200% text size ' + JSON.stringify(offenders));
+        }
       }
       await setWidth(1440);
       await setTheme('light');

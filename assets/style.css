@@ -229,3 +229,17 @@ main footer { margin-block: 1.7rem 2.5rem; color: var(--muted); font-size: .83re
 /* Multi-syllable titles must not expand narrow two-column indexes. */
 .parva-grid a > span:nth-child(2), .chapter-grid a > span:first-child { min-inline-size: 0; overflow-wrap: anywhere; }
 .parva-number, .item-arrow, .chapter-grid a > span:last-child { flex: 0 0 auto; }
+
+/* Allow native controls to reflow on narrow screens at large system text sizes. */
+.masthead nav { flex-wrap: wrap; min-inline-size: 0; }
+.brand { min-inline-size: 0; max-inline-size: 100%; white-space: normal; }
+.brand span:last-child, .masthead nav a, .layers label, .reader-action { overflow-wrap: anywhere; }
+.layers label, .layers label span, .reader-tool-font, .reader-tool-font select, .reader-tools > * {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+.layers input { flex: none; }
+.reader-action { white-space: normal; }
+@media (max-width: 360px) {
+  .reader-tool-font select { width: 100%; }
+}
